@@ -2,19 +2,19 @@
 
 ## 📌 Overview
 
-This project analyzes a product dataset from a quick-commerce platform (Zepto-like) using **SQL** in MySQL Workbench.
+This project performs an end-to-end analysis of a quick-commerce dataset (Zepto-like) using **SQL in MySQL Workbench** to derive actionable business insights.
 
-The goal is to extract **business insights** related to pricing, discounts, inventory, and category performance using structured query language.
+The analysis focuses on **pricing strategy, discount optimization, inventory management, and revenue generation**.
 
 ---
 
 ## 🎯 Business Objectives
 
-* Identify **high revenue categories**
-* Discover **best-value products**
-* Analyze **discount strategies**
+* Identify **top-performing revenue categories**
+* Discover **best-value products for customers**
+* Analyze **discount patterns across categories**
 * Detect **inventory inefficiencies**
-* Evaluate **pricing patterns**
+* Evaluate **pricing strategies**
 
 ---
 
@@ -46,22 +46,22 @@ The dataset contains product-level information:
 
 ---
 
-## 🧹 Data Cleaning Steps
+## 🧹 Data Cleaning
 
-* Removed rows with **invalid pricing (MRP = 0)**
+* Removed records with **invalid pricing (MRP = 0)**
 * Converted **paise → rupees**
-* Removed **duplicate products**
+* Eliminated **duplicate products**
 * Handled **NULL values**
-* Ensured consistency in numeric fields
+* Standardized numeric columns
 
 ---
 
 ## 🔍 Exploratory Data Analysis
 
-* Total number of products
-* Unique product categories
-* Stock availability distribution
-* Duplicate product detection
+* Total product count and category distribution
+* Stock availability analysis
+* Duplicate SKU detection
+* Category diversity analysis
 
 ---
 
@@ -69,92 +69,131 @@ The dataset contains product-level information:
 
 ### 💰 Revenue Analysis
 
-* Certain categories contribute significantly more to total revenue.
-* High-revenue categories indicate **strong demand and faster turnover**.
+* Certain categories dominate total revenue contribution
+* High-revenue categories indicate **strong demand and faster inventory turnover**
 
 ---
 
 ### 🏷️ Discount Strategy
 
-* Some categories offer consistently higher discounts.
-* High discounts may indicate:
+* Categories with high average discounts suggest:
 
-  * Competitive markets
-  * Overstock clearance
+  * Competitive pricing environments
+  * Overstock clearance strategies
 
 ---
 
 ### 📦 Inventory Insights
 
-* High-MRP products going out of stock suggest:
+* High-MRP products frequently going out of stock indicate:
 
   * Strong demand
-  * Potential supply chain gaps
+  * Potential supply chain inefficiencies
 
 ---
 
 ### ⚖️ Value for Money
 
-* Products with **low price per gram** provide better value.
-* Useful for pricing optimization and customer targeting.
+* Products with lower **price per gram** provide better customer value
+* Useful for optimizing pricing and promotional strategies
 
+---
 
-### 🔹 Window Functions
+## 📈 Key Results
 
-* Ranked top products within each category
-* Calculated revenue contribution percentage
+* 🥇 Top Revenue Category: *(Add your result here)*
+* 💸 Highest Discount Category: *(Add your result here)*
+* 🛍️ Best Value Product: *(Add your result here)*
+* 📦 Inventory Risk Insight: *(Add your finding here)*
 
-### 🔹 Common Table Expressions (CTEs)
+---
 
-* Used for cleaner and modular query design
+## 🚀 Advanced SQL Implementation
 
-### 🔹 Aggregations
+Below are key advanced SQL queries used:
 
-* Revenue, averages, and inventory weight analysis
+```sql
+-- Top 3 products per category (Window Function)
+SELECT *
+FROM (
+    SELECT name, category, discountedSellingPrice,
+           RANK() OVER (PARTITION BY category ORDER BY discountedSellingPrice DESC) AS rank
+    FROM zepto
+) ranked
+WHERE rank <= 3;
 
-### 🔹 CASE Statements
+-- Revenue contribution percentage
+SELECT category,
+SUM(discountedSellingPrice * availableQuantity) AS revenue,
+ROUND(
+    SUM(discountedSellingPrice * availableQuantity) * 100.0 /
+    SUM(SUM(discountedSellingPrice * availableQuantity)) OVER (),
+2) AS revenue_percentage
+FROM zepto
+GROUP BY category;
 
-* Product segmentation (Low / Medium / Bulk)
+-- CTE for clean data analysis
+WITH clean_data AS (
+    SELECT *
+    FROM zepto
+    WHERE mrp > 0 AND discountedSellingPrice > 0
+)
+SELECT category, COUNT(*) 
+FROM clean_data
+GROUP BY category;
+```
+
 ---
 
 ## ⚡ Performance Optimization
 
-* Created indexes on:
+Indexes created on:
 
-  * `category`
-  * `discountedSellingPrice`
+* `category`
+* `discountedSellingPrice`
 
-This improves query execution speed for large datasets.
+This improves query performance for large datasets.
+
+---
+
+## 📁 Project Structure
+
+```
+├── data/
+├── sql/
+│   └── zepto_analysis.sql
+├── README.md
+```
 
 ---
 
 ## 📌 Key Learnings
 
-* Writing **business-focused SQL queries**
-* Translating raw data into **actionable insights**
-* Using **advanced SQL features** effectively
-* Structuring a project like a real-world data analyst
+* Writing **business-oriented SQL queries**
+* Converting raw data into **actionable insights**
+* Using **CTEs and window functions**
+* Structuring a real-world data analysis workflow
 
 ---
 
 ## 🧠 Conclusion
 
-This project demonstrates how SQL can be used beyond basic querying to:
+This project demonstrates the ability to:
 
-* Solve real business problems
-* Generate meaningful insights
-* Support decision-making
+* Solve real-world business problems using SQL
+* Perform structured data analysis
+* Generate insights that support decision-making
 
-It reflects a **strong foundation in data analysis using SQL** with practical business applications.
+It reflects **industry-ready SQL and analytical thinking skills**.
 
 ---
 
 ## 📎 Future Improvements
 
-* Integrate with **Power BI dashboard**
-* Add **trend analysis (time-based data)**
-* Include **profit margin calculations**
-* Build **predictive models**
+* Build **Power BI dashboard**
+* Perform **time-series analysis**
+* Add **profit margin calculations**
+* Integrate **Python-based EDA**
 
 ---
 
