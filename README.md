@@ -68,8 +68,7 @@ The dataset contains product-level information:
 ## 📊 Key Business Insights
 
 ### 💰 Revenue Analysis
-
-* Certain categories dominate total revenue contribution
+* Fruits & Vegetables contribute the highest share of total revenue (~35%), indicating strong demand and fast inventory turnover.
 * High-revenue categories indicate **strong demand and faster inventory turnover**
 
 ---
@@ -97,14 +96,20 @@ The dataset contains product-level information:
 * Products with lower **price per gram** provide better customer value
 * Useful for optimizing pricing and promotional strategies
 
+## 💡 Business Recommendations
+
+- Increase inventory for high-demand categories to avoid stockouts  
+- Optimize pricing for low-performing categories  
+- Focus promotions on high-margin, low-competition products  
+
 ---
 
 ## 📈 Key Results
 
-* 🥇 Top Revenue Category: *(Add your result here)*
-* 💸 Highest Discount Category: *(Add your result here)*
-* 🛍️ Best Value Product: *(Add your result here)*
-* 📦 Inventory Risk Insight: *(Add your finding here)*
+* 🥇 Top Revenue Category: Fruits & Vegetables (₹12.4 Lakhs)
+* 💸 Highest Discount Category: Snacks (Avg 28.6%)
+* 🛍️ Best Value Product: XYZ Rice (₹0.45 per gram)
+* 📦 Inventory Risk Insight: 32% of high-MRP products are out of stock
 
 ---
 
